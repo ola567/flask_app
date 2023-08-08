@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from flask import request
 from flask import render_template, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
@@ -86,7 +85,7 @@ def before_request():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
